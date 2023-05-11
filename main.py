@@ -12,21 +12,25 @@ import sys
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')'''
-
+#part 1
 def find_ssr(dna_seq):
+    #list of illegible sub-sequences
     possible_repeat_seq_set = set()
     #checks for every letter till -6
-    for i in range(0, len(dna_seq)-7):
+    for i in range(0, len(dna_seq)):
         #a list of the repeats of the first letter in the current sub-sequence
         let_repeats = []
         #checks if the first letter in the sub-sequence repeats itself in the next 6 letters
-        if dna_seq[i] in dna_seq[i+1:i+7]:
+        s = 7
+        if len(dna_seq[i:-1]) < s:
+            s = len(dna_seq[i:-1])
+        if dna_seq[i] in dna_seq[i+1:i+s]:
             #adding the repeats locations to a list
-            for j in range(i+1 , i+7):
+            for j in range(i+1 , i+s):
                 if dna_seq[i] == dna_seq[j]:
                     let_repeats.append(j)
                 #adds possible sub-sequences to a set
-                    if j < i + 7:
+                    if j < i + s:
                         possible_repeat_seq_set.add(dna_seq[i:j])
                     if i == j-1:
                         possible_repeat_seq_set.add(dna_seq[i])
@@ -46,6 +50,32 @@ def find_ssr(dna_seq):
     return {s: repeating_dic[s] for s in sorted(repeating_dic)}
 
 print(find_ssr(sys.argv[1]))
+#part 2
+def transcribe(dna_seq):
+    #turning the inputed string to CAPS
+    dna_cap = dna_seq.upper()
+    dna_cap = dna_cap.replace("A","U")
+    dna_cap = dna_cap.replace("T", "A")
+    # changing G temporarily so it won't intertwine with the change from C to G.
+    dna_cap = dna_cap.replace("G", "g")
+    dna_cap = dna_cap.replace("C", "G")
+    dna_cap = dna_cap.replace("g", "C")
+    # printing the RNA from 5' to 3'
+    print(dna_cap[::-1])
+transcribe("CttGAT")
+
+#part 3
+def translate(rna_seq, reading_frame):
+    acidic_base_string = []
+    for i in rna_seq[reading_frame:-(len(rna_seq-(reading_frame))%3+1):3]:
+        if rna_seq[i] == "A":
+            if "AUG" in rna_seq[i:i+3]:
+                acidic_base_string.append("M ")
+
+
+
+
+
 
 
 
