@@ -66,25 +66,31 @@ def find_all(seq, sub_seq):
         start += len(sub_seq)  # use start += 1 to find overlapping matches
 
 
+# dictionary for all the amino acids
+def amino_acid_dictionary():
+    amino_acid_dicti = {"UUU": "F", "UUC": "F", "UUA": "L", "UUG": "L",
+                        "CUU": "L", "CUC": "L", "CUA": "L", "CUG": "L",
+                        "AUU": "I", "AUC": "I", "AUA": "I", "AUG": "M",
+                        "GUU": "V", "GUC": "V", "GUA": "V", "GUG": "V",
+                        "UCU": "S", "UCC": "S", "UCA": "S", "UCG": "S",
+                        "CCU": "P", "CCC": "P", "CCA": "P", "CCG": "P",
+                        "ACU": "T", "ACC": "T", "ACA": "T", "ACG": "T",
+                        "GCU": "A", "GCC": "A", "GCA": "A", "GCG": "A",
+                        "UAU": "Y", "UAC": "Y", "UAA": "STOP", "UAG": "STOP",
+                        "CAU": "H", "CAC": "H", "CAA": "Q", "CAG": "Q",
+                        "AAU": "N", "AAC": "N", "AAA": "K", "AAG": "K",
+                        "GAU": "D", "GAC": "D", "GAA": "E", "GAG": "E",
+                        "UGU": "C", "UGC": "C", "UGA": "STOP", "UGG": "W",
+                        "CGU": "R", "CGC": "R", "CGA": "R", "CGG": "R",
+                        "AGU": "S", "AGC": "S", "AGA": "R", "AGG": "R",
+                        "GGU": "G", "GGC": "G", "GGA": "G", "GGG": "G"}
+    return amino_acid_dicti
+
+
 # part 3
 def translate(rna_seq, reading_frame):
-    # dictionary for all the amino acids
-    amino_acid_dic = {"UUU": "F", "UUC": "F", "UUA": "L", "UUG": "L",
-                      "CUU": "L", "CUC": "L", "CUA": "L", "CUG": "L",
-                      "AUU": "I", "AUC": "I", "AUA": "I", "AUG": "M",
-                      "GUU": "V", "GUC": "V", "GUA": "V", "GUG": "V",
-                      "UCU": "S", "UCC": "S", "UCA": "S", "UCG": "S",
-                      "CCU": "P", "CCC": "P", "CCA": "P", "CCG": "P",
-                      "ACU": "T", "ACC": "T", "ACA": "T", "ACG": "T",
-                      "GCU": "A", "GCC": "A", "GCA": "A", "GCG": "A",
-                      "UAU": "Y", "UAC": "Y", "UAA": "STOP", "UAG": "STOP",
-                      "CAU": "H", "CAC": "H", "CAA": "Q", "CAG": "Q",
-                      "AAU": "N", "AAC": "N", "AAA": "K", "AAG": "K",
-                      "GAU": "D", "GAC": "D", "GAA": "E", "GAG": "E",
-                      "UGU": "C", "UGC": "C", "UGA": "STOP", "UGG": "W",
-                      "CGU": "R", "CGC": "R", "CGA": "R", "CGG": "R",
-                      "AGU": "S", "AGC": "S", "AGA": "R", "AGG": "R",
-                      "GGU": "G", "GGC": "G", "GGA": "G", "GGG": "G"}
+    # calling amino acid dictionary
+    amino_acid_dic = amino_acid_dictionary()
     rna_seq = rna_seq[reading_frame:(-((len(rna_seq) - reading_frame) % 3 + 1))]
     f = 0
     acidic_base_string = []
