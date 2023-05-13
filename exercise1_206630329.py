@@ -66,6 +66,7 @@ def find_all(seq, sub_seq):
         start += len(sub_seq)  # use start += 1 to find overlapping matches
 
 
+# part 3
 # dictionary for all the amino acids
 def amino_acid_dictionary():
     amino_acid_dicti = {"UUU": "F", "UUC": "F", "UUA": "L", "UUG": "L",
@@ -87,7 +88,7 @@ def amino_acid_dictionary():
     return amino_acid_dicti
 
 
-# part 3
+# translating RNA to amino acid chain (returning longest one)
 def translate(rna_seq, reading_frame):
     # calling amino acid dictionary
     amino_acid_dic = amino_acid_dictionary()
