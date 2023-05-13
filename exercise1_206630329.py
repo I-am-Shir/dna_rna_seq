@@ -100,7 +100,7 @@ def translate(rna_seq, reading_frame):
     return acidic_base_string
 
 #part 4-main
-#function to print the SSR sub sequences we found function
+#function to print the SSR sub-sequences we found function
 def print_ssr(seq):
     ssr_dic = find_ssr(seq)
     key_list = list(ssr_dic.keys())
@@ -122,6 +122,7 @@ def print_translation(rna_seq, reading_frame):
     if acidic_bases=="None":
         print("Non-coding RNA")
     else:
+        print("Translation: ",end='')
         for i in range(0, len(acidic_bases)-1):
             print(acidic_bases[i]+";", end='')
         print(acidic_bases[i+1])
